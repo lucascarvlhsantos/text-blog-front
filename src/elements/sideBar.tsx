@@ -31,11 +31,7 @@ export const SideBar: React.FC<SideBar> = ({ profileImg, userName, userId, logge
                     <>
                         <div className='sidebar-user-text'>
                             <div className='user-name'>
-                                <p>Conecte-se</p>
-                            </div>
-                            <div className='user-id'>
-                                <button>LogIn</button>
-                                <button>Cadastrar</button>
+                                <p>Clique <a href="#">aqui</a> para entrar.</p>
                             </div>
                         </div>
                     </>

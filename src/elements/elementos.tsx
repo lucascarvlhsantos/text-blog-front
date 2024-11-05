@@ -1,15 +1,15 @@
 import React from 'react';
+import { SearchText } from '../App';
 
 type CardProps = {
   imagem: string;
-  tituloImagem: string;
-  titulo: string;
-  conteudo: string;
-  cor: string;
+  onClick: () => void;
 };
-const Card: React.FC<CardProps> = ({ imagem }) => {
+const Card: React.FC<CardProps> = ({ imagem, onClick }) => {
   return (
-    <button className={"post"} style={{
+    <button
+    onClick={onClick}
+    className={"post"} style={{
     backgroundImage: `url(${imagem})`,
     backgroundPosition: 'center',
     backgroundSize: '100% 100%',

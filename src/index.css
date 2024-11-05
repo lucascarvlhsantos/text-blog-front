@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
   margin: 0;
@@ -8,13 +11,54 @@
   box-sizing: border-box;
 }
 
+[data-sonner-toast] {
+  padding: 1rem 1.5rem;
+  color: #fff;
+  background: #ff6161;
+}
+
+[data-sonner-toast] [data-title] {
+  font-weight: 500;
+  line-height: 1.5;
+  color: inherit;
+}
+
 .post {
   min-width: 120px;
 }
 
+.right-bar .loader {
+  margin: auto;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+}
+
+.loader {
+  --s: 40px;
+  height: calc(var(--s)*0.9);
+  width: calc(var(--s)*5);
+ --v1:transparent,#000 0.5deg 108deg,#0000 109deg;
+ --v2:transparent,#000 0.5deg  36deg,#0000  37deg;
+ -webkit-mask:
+   conic-gradient(from 54deg  at calc(var(--s)*0.68) calc(var(--s)*0.57),var(--v1)),
+   conic-gradient(from 90deg  at calc(var(--s)*0.02) calc(var(--s)*0.35),var(--v2)),
+   conic-gradient(from 126deg at calc(var(--s)*0.5)  calc(var(--s)*0.7) ,var(--v1)),
+   conic-gradient(from 162deg at calc(var(--s)*0.5)  0                  ,var(--v2));
+ -webkit-mask-size: var(--s) var(--s);
+ -webkit-mask-composite: xor,destination-over;
+         mask-composite: exclude,add;
+ -webkit-mask-repeat:repeat-x;
+ background:linear-gradient(#ffb940 0 0) left/0% 100% #ddd no-repeat;
+ animation: l20 2s infinite linear;
+}
+@keyframes l20 {
+   90%,100% {background-size:100% 100%}
+}
+
 body {
   overflow: hidden;
-  background-color: #f8f8f8;
+  background-color: #fff;
   color: #333;
   display: flex;
   flex-direction: column;
@@ -43,6 +87,14 @@ body {
 .subtitle {
   font-size: 1em;
   font-weight: 300;
+}
+
+.left-side {
+  top: 0;
+  left: 5% !important;
+  position: absolute;
+  width: 20%;
+  left: 0;
 }
 
 .nav {
@@ -108,8 +160,9 @@ body {
 }
 
 .posts-title h2 {
-  color: #61514b;
+  color: #272a34;
   font-size: 18px;
+  font-weight: 600;
   margin-right: auto;
 }
 
@@ -120,12 +173,16 @@ body {
   width: 100%;
 }
 
+.genere-title h2 {
+  font-weight: 600;
+}
+
 .genere-body {
-  padding: 0 2rem 2rem 2rem;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   width: 100%;
+  margin-bottom: 1rem;
 }
 
 .genere-element {
@@ -141,19 +198,19 @@ body {
 }
 
 .genere-body button {
+  margin-right: auto;
   min-width: 80px;
   justify-content: center;
   cursor: pointer;
   background: #f5f5f5;
   border: none;
-  padding: 1rem;
+  padding: .5rem 1rem;
   border-radius: 15px;
   font-family: "Montserrat", sans-serif;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   display: flex;
   font-size: 12px;
   color: #61514b;
-  width: 90px;
   font-weight: 500;
 }
 
@@ -170,7 +227,8 @@ body {
 }
 
 .genere-body button.selected {
-  background-color: #e3e3e3;
+  color: #fff;
+  background-color: #272935;
 }
 
 .genere {
@@ -193,8 +251,8 @@ body {
 .posts-title a {
   padding: 5px 20px;
   border-radius: 5px;
-  border: 1px solid #ae9891;
-  color: #ae9891;
+  border: 1px solid #272935;
+  color: #272935;
   text-decoration: none;
   font-size: 12px;
   font-weight: 600;
@@ -219,12 +277,12 @@ body {
   display: flex;
   flex-direction: row;
   background-color: #fff;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  box-shadow: -15px 15px 25px rgba(0, 0, 0, 0.4), -5px 5px 10px rgba(0, 0, 0, 0.2);
   max-width: 100%;
   overflow: hidden;
   transition: transform 0.2s;
-  margin: 0 auto;
+  margin: 0 15px;
   justify-content: flex-start;
   border: none;
 }
@@ -297,8 +355,8 @@ body {
 .sidebar {
   top: 0;
   z-index: 11;
-  width: 20%;
-  background-color: #f7f9f9;
+  width: 6%;
+  background-color: #e35f63;
   display: flex;
   position: absolute;
   height: 100%;
@@ -344,41 +402,39 @@ body {
 .sidebar-menu {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-top: 1em;
+  align-items: center;
+  justify-content: center;
+  margin-top: 88%;
   left: 0;
   height: 100%;
 }
 
 .sidebar-menu a {
+  justify-content: center;
+  align-items: center;
   font-family: "Montserrat", sans-serif;
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 500;
   color: #fac386;
   text-decoration: none;
-  align-self: center;
   display: flex;
-  align-items: center;
   width: 100%;
-  padding: .8rem 0rem .8rem 3rem;
+  padding: .8rem;
   margin-bottom: .2rem;
 }
 
-.sidebar-menu a.selected {
-  background-color: #f8eee2;
-}
-
-.sidebar-menu a:hover, .sidebar-menu a:focus {
-  background-color: #f8eee2;
+.sidebar-menu a.selected svg {
+  background-color: #fff;
+  color: #e35f64;
 }
 
 .sidebar-menu svg {
-  border-radius: 5px;
-  padding: .2rem;
-  background: #fd9725;
+  border-radius: 50%;
+  padding: .5rem;
+  background: transparent;
   color: #fff;
-  font-size: 24px;
-  margin-right: 18px;
+  font-size: 40px;
+  font-weight: 400;
 }
 
 .menu-bottom {
@@ -393,7 +449,18 @@ body {
   width: 100%;
 }
 
+.middle {
+  overflow-y: auto !important;
+  -ms-overflow-style: none;
+}
+
+.middle::-webkit-scrollbar {
+  display: none;
+}
+
 .right-bar.display {
+  opacity: 1;
+ transition: opacity 2s linear;
   display: flex;
 }
 
@@ -407,6 +474,7 @@ body {
   align-items: center;
   padding: 1rem 0 1rem 1rem;
   top: 0;
+  opacity: 0;
   position: absolute;
   right: 0;
   display: none;
@@ -435,12 +503,14 @@ body {
 }
 
 .book-title h2 {
+  font-weight: 600 !important;
   color: #61514b;
   left: 0;
   justify-self: flex-start;
   align-self: flex-start;
   font-family: "Cinzel", serif;
   font-size: 18px;
+  margin-bottom: 5px !important;
 }
 
 .book-title span {
@@ -617,10 +687,17 @@ body {
 }
 
 .sidebar-top.not-logged .user-name {
+  color: #c8bebb;
   width: 100%;
   margin-bottom: 1rem;
   display: flex;
   justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.user-name a {
+  color: #e35e64;
 }
 
 .sidebar-top.not-logged .user-id {
@@ -633,4 +710,22 @@ body {
 .sidebar-top.not-logged button {
   margin-right: 10px !important;
   margin-left: 0 !important;
+}
+
+.right-bar .error {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.right-bar.error {
+  display: flex;
+  justify-content: center;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
 }
